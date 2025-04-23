@@ -49,6 +49,7 @@ int main()
 			    else if(points.size() == 0)
 			    {
 				///fourth click
+				points.push_back(Vector2f(event.mouseButton.x, event.mouseButton.y));
 				///push back to points vector
 			    }
 			}
