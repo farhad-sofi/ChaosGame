@@ -71,7 +71,7 @@ int main()
     instructions.setFillColor(Color::White);
 
     // Initial shape mode prompt
-    Text shapePrompt("Press T for Triangle, S for Square, H for Hexagon, font, 30);
+    Text shapePrompt("Press T for Triangle, S for Square, H for Hexagon", font, 30);
     shapePrompt.setPosition(60, 60);
     shapePrompt.setFillColor(Color::Yellow);
 
