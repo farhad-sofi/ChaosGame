@@ -98,6 +98,8 @@ starterMessage.setFont(font);
 starterMessage.setString("Click three spots on the screen to create a triangle!");
 starterMessage.setCharacterSize(100);
 starterMessage.setFillColor(Color::White);
+starterMessage.setPosition(20, 20);
+
 
 
 
