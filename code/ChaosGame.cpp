@@ -31,16 +31,16 @@ void generateSquarePoints(vector<Vector2f>& points, const vector<Vector2f>& vert
         points.push_back(midpoint);
     }
 }
-void generateOctagonPoints(vector<Vector2f>& points, const vector<Vector2f>& vertices) {
+void generateHexagonPoints(vector<Vector2f>& points, const vector<Vector2f>& vertices) {
     static int lastIndex = -1;
 
     for (int i = 0; i < 100; ++i)
     {
         int randIndex;
         do {
-            randIndex = rand() % 8;
+            randIndex = rand() % 6;
         } while (
-            randIndex == lastIndex || randIndex == (lastIndex + 1) % 8 || randIndex == (lastIndex + 7) % 8
+            randIndex == lastIndex || randIndex == (lastIndex + 1) % 6 || randIndex == (lastIndex + 5) % 6
             );
 
         lastIndex = randIndex;
@@ -49,38 +49,7 @@ void generateOctagonPoints(vector<Vector2f>& points, const vector<Vector2f>& ver
     }
 }
 
-void generateSpiralPoints(vector<Vector2f>& points, const vector<Vector2f>& vertices) {
-    for (int i = 0; i < 100; ++i) {
-        int randIndex = rand() % vertices.size();
-        Vector2f lastPoint = points.back();
-        Vector2f vertex = vertices[randIndex];
-
-        // Translate to origin
-        Vector2f dir = vertex - lastPoint;
-
-        // Rotate slightly
-        float angle = 0.05f; 
-        float cosA = cos(angle);
-        float sinA = sin(angle);
-
-        Vector2f rotated(
-            cosA * dir.x - sinA * dir.y,
-            sinA * dir.x + cosA * dir.y
-        );
-
-        rotated *= 0.97f;
-
-        // Translate back
-        Vector2f spiralPoint = lastPoint + rotated;
-        points.push_back(spiralPoint);
-    }
-}
-
-
-
-
-
-enum class Mode { None, Triangle, Square, Octagon , Spiral};
+enum class Mode { None, Triangle, Square, Hexagon};
 
 int main()
 {
@@ -102,7 +71,7 @@ int main()
     instructions.setFillColor(Color::White);
 
     // Initial shape mode prompt
-    Text shapePrompt("Press T for Triangle, S for Square, O for Octagon, R for Spiral", font, 30);
+    Text shapePrompt("Press T for Triangle, S for Square, H for Hexagon, font, 30);
     shapePrompt.setPosition(60, 60);
     shapePrompt.setFillColor(Color::Yellow);
 
@@ -130,17 +99,11 @@ int main()
                 requiredVertices = 4;
                 instructions.setString("Click 4 points for square, then 1 point to start.");
             }
-			else if (Keyboard::isKeyPressed(Keyboard::O))
+			else if (Keyboard::isKeyPressed(Keyboard::H))
 			{
-				mode = Mode::Octagon;
-				requiredVertices = 8;
-				instructions.setString("Click 8 points for octagon, then 1 point to start.");
-			}
-			else if (Keyboard::isKeyPressed(Keyboard::R))
-			{
-				mode = Mode::Spiral;
-				requiredVertices = 5;
-				instructions.setString("Click 5 points for spiral, then 1 point to start.");
+				mode = Mode::Hexagon;
+				requiredVertices = 6;
+				instructions.setString("Click 6 points for hexagon, then 1 point to start.");
 			}
         }
 
@@ -183,10 +146,8 @@ int main()
                 generateTrianglePoints(points, vertices);
             else if (mode == Mode::Square)
                 generateSquarePoints(points, vertices);
-			else if (mode == Mode::Octagon)
-				generateOctagonPoints(points, vertices);
-			else if (mode == Mode::Spiral)
-				generateSpiralPoints(points, vertices);
+			else if (mode == Mode::Hexagon)
+				generateHexagonPoints(points, vertices);
         }
 
 
