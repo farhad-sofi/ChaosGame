@@ -90,3 +90,8 @@ int main()
 		window.display();
 	}
 }
+
+Text starterMessage;
+Font font;
+font.loadFromFile("C:\Users\User\Downloads\antzuw/");
+
