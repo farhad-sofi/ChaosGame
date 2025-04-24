@@ -224,7 +224,15 @@ int main()
 
 Text starterMessage;
 Font font;
-font.loadFromFile("C:\Users\User\Downloads\antzuw/");
+font.loadFromFile("Antzuw Demo.otf");
+starterMessage.setFont(font);
+starterMessage.setString("Click three spots on the screen to create a triangle!");
+starterMessage.setCharacterSize(100);
+starterMessage.setFillColor(Color::White);
+starterMessage.setPosition(20, 20);
+
+
+
 
 
 // Do you see this?
