@@ -221,3 +221,8 @@ int main()
 
     return 0;
 }
+
+Text starterMessage;
+Font font;
+font.loadFromFile("C:\Users\User\Downloads\antzuw/");
+
